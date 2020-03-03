@@ -10,7 +10,7 @@ import * as serviceWorker from './serviceWorker';
 
 
 //allows all users to view app
-const store = createStore(rootReducer, compose (
+const store = createStore(compose (
     applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ 
         && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() || compose
