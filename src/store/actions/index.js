@@ -1,4 +1,5 @@
-import axios from "axios";
+import axiosWithAuth from '../../axios/index';
+
 
 //Get Trucks
 export const FETCH_TRUCK = "FETCH_TRUCK";
@@ -20,7 +21,7 @@ export const DELETE_SUCCESS = 'DELETE_SUCCESS';
 
 export const fetchTrucks = () => dispatch => {
     dispatch({ type: FETCH_TRUCK })
-    axios
+    axiosWithAuth()
         .get('')
         .then(response => dispatch({ type: FETCH_SUCCESS, payload: response.data})) 
         .catch(error => dispatch({ type: FETCH_FAIL, payload: error.response}))
@@ -28,7 +29,7 @@ export const fetchTrucks = () => dispatch => {
 
 export const addTrucks = newTruck => dispatch => {
     dispatch({ type: ADD_TRUCK })
-    axios
+    axiosWithAuth()
         .post ('', newTruck)
         .then(response => dispatch({ type: ADD_SUCCESS, payload: response.data})) 
         .catch(error => dispatch({ type: FETCH_FAIL, payload: error.response}))
@@ -36,14 +37,16 @@ export const addTrucks = newTruck => dispatch => {
 
 export const editTrucks = truck => dispatch => {
     dispatch({ type: UPDATE_TRUCK })
-    axios.put('', truck)
+    axiosWithAuth()
+        .put('', truck)
         .then(response => dispatch({ type: UPDATE_SUCCESS, payload: response.data})) 
         .catch(error => dispatch({ type: FETCH_FAIL, payload: error.response}))
 };
 
 export const deleteTrucks = truck => dispatch => {
     dispatch({ type: DELETE_TRUCK })
-    axios.put('', truck)
+    axiosWithAuth()
+        .delete('', truck)
         .then(response => dispatch({ type: DELETE_SUCCESS, payload: response.data})) 
         .catch(error => dispatch({ type: FETCH_FAIL, payload: error.response}))
 };
