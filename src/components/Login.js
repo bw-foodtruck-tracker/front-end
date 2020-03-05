@@ -1,5 +1,54 @@
-// user can login or register operator or diner
-// need username, valid email address, strong password
-// maybe ask (are you a diner or operator?)
+import React from 'react';
+import { Formik, Form, Field } from 'formik';
+import {Link} from 'react-router-dom';
+import * as Yup from 'yup';
 
-// login page created by Francis and i am going to make on as well 
+const SignupSchema = Yup.object().shape({
+    username: Yup.string()
+    .max(50, 'Username be less than 50 characters')
+    .required('Username is Required'),
+    email: Yup.string()
+    .email('Invalid email')
+    .required('Email required'),
+    password: Yup.string()
+    .required('password required'),
+});
+
+
+const Login = () => (
+<div>
+    <h2>Login</h2>
+    <Formik
+    initialValues={{
+        username: '',
+        email: '',
+        password: '',
+    }}
+    validationSchema={SignupSchema}
+    onSubmit={values => {
+        console.log(values);
+    }}
+    >
+    {({ errors, touched }) => (
+        <Form>
+        <Field name="username" />
+        {errors.username && touched.username ? (
+            <div>{errors.username}</div>
+        ) : null}
+        <Field name="email" />
+        {errors.email && touched.email ? <div>{errors.email}</div> : null}
+        <Field name="password" type="password" />
+        {errors.password && touched.password ? (
+            <div>{errors.password}</div>
+        ) : null}
+        <button type="submit">Submit</button>
+        <Link to='/register'>
+                {`Don't have an account? Sign Up`}
+            </Link>
+        </Form>
+    )}
+    </Formik>
+</div>
+);
+
+export default Login;
