@@ -1,1 +1,0 @@
-//Array of the diners favorite trucks
