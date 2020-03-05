@@ -19,10 +19,11 @@ export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
 export const DELETE_TRUCK = 'DELETE_TRUCK';
 export const DELETE_SUCCESS = 'DELETE_SUCCESS';
 
+
 export const fetchTrucks = () => dispatch => {
     dispatch({ type: FETCH_TRUCK })
     axiosWithAuth()
-        .get('')
+        .get('https://foodtruck-tracker-lambda1.herokuapp.com/api/operator/1/truck')
         .then(response => dispatch({ type: FETCH_SUCCESS, payload: response.data})) 
         .catch(error => dispatch({ type: FETCH_FAIL, payload: error.response}))
 };
@@ -30,7 +31,7 @@ export const fetchTrucks = () => dispatch => {
 export const addTrucks = newTruck => dispatch => {
     dispatch({ type: ADD_TRUCK })
     axiosWithAuth()
-        .post ('', newTruck)
+        .post ('https://foodtruck-tracker-lambda1.herokuapp.com/api/operator/1/truck', newTruck)
         .then(response => dispatch({ type: ADD_SUCCESS, payload: response.data})) 
         .catch(error => dispatch({ type: FETCH_FAIL, payload: error.response}))
 };
@@ -38,7 +39,7 @@ export const addTrucks = newTruck => dispatch => {
 export const editTrucks = truck => dispatch => {
     dispatch({ type: UPDATE_TRUCK })
     axiosWithAuth()
-        .put('', truck)
+        .put('https://foodtruck-tracker-lambda1.herokuapp.com/api/operator/1/truck', truck)
         .then(response => dispatch({ type: UPDATE_SUCCESS, payload: response.data})) 
         .catch(error => dispatch({ type: FETCH_FAIL, payload: error.response}))
 };
@@ -46,7 +47,7 @@ export const editTrucks = truck => dispatch => {
 export const deleteTrucks = truck => dispatch => {
     dispatch({ type: DELETE_TRUCK })
     axiosWithAuth()
-        .delete('', truck)
+        .delete('https://foodtruck-tracker-lambda1.herokuapp.com/api/operator/1/truck', truck)
         .then(response => dispatch({ type: DELETE_SUCCESS, payload: response.data})) 
         .catch(error => dispatch({ type: FETCH_FAIL, payload: error.response}))
 };
