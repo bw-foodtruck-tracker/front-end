@@ -9,6 +9,9 @@ import './App.css';
 import Register from './components/Register'
 import Login from './components/Login'
 import SearchPage from './components/SearchPage'
+import VendorPage from './components/VendorPage';
+import Favorites from './components/Favorites';
+
 
 function App() {
   return (
@@ -16,6 +19,8 @@ function App() {
       <Route exact path ='/' component={Login}/>
       <Route exact path ='/register' component={Register}/>
       <PrivateRoute component={SearchPage} exact path = '/truck-search'/>
+      <PrivateRoute component={Favorites} exact path = '/favorites'/>
+      <PrivateRoute component={VendorPage} exact path = '/trucks' />
   
     </div>
   );
