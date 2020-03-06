@@ -1,5 +1,6 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import axios from 'axios';
+import { withFormik, Formik, Form, Field } from 'formik';
 import {Link} from 'react-router-dom';
 import * as Yup from 'yup';
 
@@ -51,4 +52,36 @@ const Login = () => (
 </div>
 );
 
-export default Login;
+
+const FormikLogin = withFormik({
+
+    mapPropsToValues({ user, email, password }) {
+        return {
+        user: user || "",
+        email: email || "",
+        password: password || "",
+        };
+    },
+
+    handleSubmit(values, { props, resetForm }) {
+        const params ={
+        username: values.user,
+        email: values.email,
+        password: values.password
+        }
+
+    axios
+        .post("https://foodtruck-tracker-lambda1.herokuapp.com/api/auth/login", params)
+        .then(response => {
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('user', response.data.user.id);
+            props.history.push("/favorites")
+            resetForm();
+        })
+        .catch(error => {
+            alert(error.message)
+        });
+    }
+})(Login);
+
+export default FormikLogin;

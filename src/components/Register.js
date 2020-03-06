@@ -1,6 +1,7 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
-import {Link} from 'react-router-dom';
+import axios from 'axios';
+import { withFormik, Formik, Form, Field } from 'formik';
+// import {Link} from 'react-router-dom';
 import * as Yup from 'yup';
 
 const SignupSchema = Yup.object().shape({
@@ -50,4 +51,39 @@ return (
 </div>
 )};
 
-export default Register;
+
+
+const FormikRegister = withFormik({
+
+    mapPropsToValues({ user, email, password }) {
+        return {
+        user: user || "",
+        email: email || "",
+        password: password || "",
+        };
+    },
+
+    handleSubmit(values, { props, resetForm }) {
+        const params ={
+        username: values.user,
+        email: values.email,
+        password: values.password
+        }
+
+    axios
+        .post("https://foodtruck-tracker-lambda1.herokuapp.com/api/auth/diner/register", params)
+        .then(response => {
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('user', response.data.user.id);
+            props.history.push("/login")
+            resetForm();
+        })
+        .catch(error => {
+            alert(error.message)
+        });
+    }
+})(Register);
+
+
+
+export default FormikRegister;
