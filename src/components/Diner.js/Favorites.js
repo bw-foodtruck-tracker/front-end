@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import * as actionCreators from '../state/actionCreators';
-import Truck from './Truck';
+import * as actionCreators from '../../store/actions/index';
+import Truck from '../Truck';
 
 
 

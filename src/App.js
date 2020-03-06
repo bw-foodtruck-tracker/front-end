@@ -9,8 +9,8 @@ import './App.css';
 import Register from './components/Register'
 import Login from './components/Login'
 import SearchPage from './components/SearchPage'
-import VendorPage from './components/VendorPage';
-import Favorites from './components/Favorites';
+import VendorPage from './components/Operator.js/VendorTrucks';
+import Favorites from './components/Diner.js/Favorites';
 
 
 function App() {

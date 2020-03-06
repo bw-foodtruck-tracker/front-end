@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import * as actionCreators from '../state/actionCreators';
+import * as actionCreators from '../../store/actions/index';
 
 
 const VendorPage = ({ DELETE_TRUCK, ADD_TRUCK, fetchTrucks, trucks }) => {
