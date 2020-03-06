@@ -2,15 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { createStore, compose, applyMiddleware} from 'redux';
+import { combineReducers, createStore, compose, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import { BrowserRouter as Router } from "react-router-dom";
 import thunk from 'redux-thunk';
+import * as reducers from './store/reducers'
 import * as serviceWorker from './serviceWorker';
 
+const rootReducer = combineReducers({
+    trucks: reducers.trucksReducer,
+})
 
 //allows all users to view app
-const store = createStore(compose (
+const store = createStore(rootReducer, compose (
     applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ 
         && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() || compose
