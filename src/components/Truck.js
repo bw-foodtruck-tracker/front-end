@@ -2,7 +2,20 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actionCreators from '../store/actions/index';
 
-const Truck = () => {
+const Truck = ({trucks, truck, buttonText, ADD_TRUCK, DELETE_TRUCK}) => {
+    const submit = id => event => {
+        event.preventDefault();
+        if (buttonText === 'Remove') {
+            const newTrucks = trucks.filter(truck => {
+                return truck.id !== id
+            })
+            ADD_TRUCK(newTrucks)
+            DELETE_TRUCK(id);
+        }
+        else {
+            ADD_TRUCK(id)
+        }
+    }
 
 
     return (
